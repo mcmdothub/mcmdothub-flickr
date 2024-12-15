@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Flickr - HTML Page">
+        <!-- Title-->
+        <title>Flickr - HTML Page</title>
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="assets/img/core-img/favicon.ico" type="image/x-icon">
+    </head>
+
+    <body>
+        <!-- Preloader-->
+        <div class="preloader" id="preloader">
+            <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+        </div>
+        <!-- Header Area-->
+        <header class="header-area sticky-on">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <!-- Navbar Brand -->
+                    <a class="navbar-brand" href="index.html">
+                        <img class="light-logo" src="assets/img/core-img/flickr_logo_dots.svg" alt="">
+                        <img class="dark-logo" src="assets/img/core-img/flickr_logo_dots_white.svg" alt="">
+                    </a>
+
+                    <!-- Navbar Toggler -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#flickrNav" aria-controls="flickrNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-grid"></i>
+                    </button>
+
+                    <!-- Navbar -->
+                    <div class="collapse navbar-collapse" id="flickrNav">
+                        <!-- Header Meta -->
+                        <div class="header-meta d-flex align-items-center ms-lg-auto">
+                            <!-- Search Form -->
+                            <div class="search-form position-relative d-flex align-items-center">
+                                <input id="photoSearch" class="form-control" type="text" placeholder="Search Photos">
+                                <button id="searchButton" class="position-absolute" type="submit"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </nav>
+        </header>
+
+        <div class="dynamically-generated-content">
+            <div class="welcome-area pt-120">
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div id="welcomeContent" class="col-12 col-sm-10 col-md-6">
+                      <div class="welcome-content mb-5 mb-md-0">
+                        <h2 data-aos="fade-up" data-aos-duration="750" data-aos-delay="500">Cygni - Flickr - HTML Page</h2>
+                        <p class="mb-4" data-aos="fade-up" data-aos-duration="750" data-aos-delay="800">
+                            Build a photo gallery &amp; a REST API for Flickr.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 col-sm-9 col-md-6">
+                      <div class="welcome-thumb" data-aos="fade-up" data-aos-duration="750" data-aos-delay="500"><img src="assets/img/bg-img/bg-homepage.jpg" alt=""></div>
+                    </div>
+                  </div>
+                </div>
+    
+                <!-- Photo Results -->
+                <div class="row" id="photoResults" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Footer -->
+        <footer class="footer-area">
+            <div class="container" style="margin-top:10px; margin-bottom: 10px;">
+                <div class="row">
+                    <!-- Footer Widget -->
+                    <div class="col-12 col-lg-5">
+                        <div class="footer-widget-area pe-lg-4 pe-xl-5 me-lg-4 me-xl-5 border-end">
+                            <a class="d-block mb-4" href="index.html">
+                                <img style="height: 20px;" class="light-logo" src="assets/img/core-img/flickr_logo_dots.svg" alt="">
+                                <img style="height: 20px;" class="dark-logo" src="assets/img/core-img/flickr_logo_dots_white.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="copywrite-wrapper d-lg-flex align-items-lg-center justify-content-lg-between" style="display: flex; justify-content: space-between;">
+                    <!-- Copywrite Text -->
+                    <div class="copywrite-text text-center text-lg-start mb-3 mb-lg-0">
+                        <p class="mb-0">2024 &copy; All rights reserved by <a href="https://cygni.se/" target="_blank" rel="noreferrer">
+                            Cygni</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scroll To Top -->
+        <div id="scrollTopButton"><i class="bi bi-arrow-up-short"></i></div>
+    </body>
+</html>

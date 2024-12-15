@@ -1,0 +1,79 @@
+/*
+    [Main Stylesheet]
+
+    Name: Flickr - HTML Page
+    Author: Cygni
+    Author URL: https://cygni.se
+    Version: 0.0.1
+*/
+
+/*
+[Table of Contents]
+    Google Fonts
+    Template Variables
+    Template Responsive
+    Basic Styles
+        + Reboot CSS
+        + Shortcodes CSS
+    Components Styles
+            + Preloader CSS
+            + Helpers CSS
+            + Header CSS
+            + Hero CSS
+            + Footer CSS
+            + Explore Page CSS
+            + Tab CSS
+            + Breadcrumb CSS
+            + Icons CSS
+            + Dark CSS
+
+[font-family]
+'DM', sans-serif;
+*/
+
+/* Google Fonts */
+/* Import fonts & SCSS files */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+/* Template Variables */
+@import "styles/variables.scss";
+
+/* Template Responsive */
+@import "styles/responsive.scss";
+
+/* Reboot CSS */
+@import "styles/reboot.scss";
+
+/* Shortcodes CSS */
+@import "styles/shortcode.scss";
+
+/* Preloader CSS */
+@import "styles/preloader.scss";
+
+/* Helpers CSS */
+@import "styles/helpers.scss";
+
+/* Header CSS */
+@import "styles/header.scss";
+
+/* Hero CSS */
+@import "styles/hero.scss";
+
+/* Footer CSS */
+@import "styles/footer.scss";
+
+/* Explore Page CSS */
+@import "styles/explore.scss";
+
+/* Tab CSS */
+@import "styles/tab.scss";
+
+/* Breadcrumb CSS */
+@import "styles/breadcrumb.scss";
+
+/* Icons CSS */
+@import "styles/icons.scss";
+
+/* Dark CSS */
+@import "styles/dark.scss";
+

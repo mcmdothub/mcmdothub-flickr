@@ -1,0 +1,33 @@
+.align-items-center {
+    align-items: center !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.rounded-pill {
+    border-radius: 50rem !important;
+}
+
+@media only screen and (min-width: 992px) {
+    .ms-lg-auto {
+        margin-left: auto !important;
+    }
+}
