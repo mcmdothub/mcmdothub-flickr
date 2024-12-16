@@ -1,8 +1,10 @@
+// Dynamic Version Management
+// Define the endpoint of your ASP.NET Core Web API
+const apiVersion = 'v1.0';
+const apiEndpoint = `https://localhost:7106/api/${apiVersion}/Photos/search`;
+
 const photoSearchInput = document.querySelector('#photoSearch');
 const welcomeArea = document.querySelector('.dynamically-generated-content');
-
-// Define the endpoint of your ASP.NET Core Web API
-const apiEndpoint = 'https://localhost:7106/api/Photos/search';
 
 // Initialize variables
 let prevKeyword = '';
@@ -11,8 +13,23 @@ let currPage = 1;
 let isLoading = false;
 let allPhotos = [];
 
+// Get reference to the loading modal
+const loadingModal = document.getElementById('loadingModal');
+
+// Show Loading Modal
+function showLoadingModal() {
+    loadingModal.classList.add('show');
+}
+
+// Hide Loading Modal
+function hideLoadingModal() {
+    loadingModal.classList.remove('show');
+}
+
 // Function to fetch photos from the API
 async function fetchPhotos(query, page = 1) {
+    showLoadingModal(); // Show loading modal before API call starts
+
     try {
         const response = await fetch(`${apiEndpoint}?text=${encodeURIComponent(query)}&perPage=12&page=${page}`);
         if (!response.ok) {
@@ -22,7 +39,10 @@ async function fetchPhotos(query, page = 1) {
         return data.photos.photo; // Adjust according to the response structure
     } catch (error) {
         console.error('Error fetching photos:', error);
+        alert('The server is unresponsive. Please try again later.'); // Optional: Show an alert
         return [];
+    } finally {
+        hideLoadingModal(); // Hide loading modal after API call finishes or fails
     }
 }
 
@@ -42,7 +62,7 @@ function generateExploreContent(photos) {
                             <div class="col-8">
                                 <div class="name-info d-flex align-items-center">
                                     <div class="name-author">
-                                        <a class="name d-block hover-primary fw-bold text-truncate" href="#">${photo.title || 'Untitled'}</a>
+                                        <a class="author name d-block hover-primary fw-bold text-truncate" href="#">${photo.title || 'Untitled'}</a>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +117,31 @@ async function handleDynamicSearch(query) {
             `;
             welcomeArea.innerHTML = newContent;
         } else {
-            welcomeArea.innerHTML = `<p class="text-center">No results found for "${query}".</p>`;
+            welcomeArea.innerHTML = `
+                <div class="breadcrumb-wrapper">
+                    <div class="container">
+                        <div class="breadcrumb-content">
+                            <h2 class="breadcrumb-title">Explore Results</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb justify-content-center">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Explore</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="explore-items-wrapper">
+                    <div class="container">
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-12 text-center">
+                                <p class="text-muted fs-5">No results found for <span class="fw-bold">"${query}"</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
     } else {
         

@@ -22,9 +22,9 @@
             + Hero CSS
             + Footer CSS
             + Explore Page CSS
-            + Tab CSS
             + Breadcrumb CSS
             + Icons CSS
+            + Modal CSS
             + Dark CSS
 
 [font-family]
@@ -65,14 +65,14 @@
 /* Explore Page CSS */
 @import "styles/explore.scss";
 
-/* Tab CSS */
-@import "styles/tab.scss";
-
 /* Breadcrumb CSS */
 @import "styles/breadcrumb.scss";
 
 /* Icons CSS */
 @import "styles/icons.scss";
+
+/* Modal CSS */
+@import "styles/modal.scss";
 
 /* Dark CSS */
 @import "styles/dark.scss";

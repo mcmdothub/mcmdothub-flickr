@@ -1,8 +1,10 @@
-﻿namespace Flickr.Api.Services.Interfaces
+﻿using Flickr.Api.ApiResponse;
+
+namespace Flickr.Api.Services.Interfaces
 {
     public interface IFlickrPhotosService
     {
-        Task<dynamic?> SearchPhotosAsync(
+        Task<FlickrPhotoResponse?> SearchPhotosAsync(
             string? userId = null,
             string? tags = null,
             string? tagMode = null,

@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Flickr.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class PhotosController : ControllerBase
     {
         private readonly IFlickrPhotosService _flickrPhotosService;

@@ -1,6 +1,8 @@
 using Flickr.Api.Services.Interfaces;
 using Flickr.Api.Services;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Flickr.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +19,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Flickr API",
-        Version = "v1",
+        Version = "v1.0",
         Description = "Flickr is an online photo management and sharing application",
         Contact = new OpenApiContact
         {
@@ -46,6 +48,14 @@ builder.Services.AddCors(options =>
         });
 });
 
+// API versioning to keep compatibility with future versions
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,6 +64,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

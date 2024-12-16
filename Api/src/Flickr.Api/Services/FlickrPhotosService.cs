@@ -1,4 +1,5 @@
-﻿using Flickr.Api.Services.Interfaces;
+﻿using Flickr.Api.ApiResponse;
+using Flickr.Api.Services.Interfaces;
 using System.Text.Json;
 
 namespace Flickr.Api.Services
@@ -8,12 +9,16 @@ namespace Flickr.Api.Services
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
+        private readonly ILogger<FlickrPhotosService> _logger;
 
-        public FlickrPhotosService(HttpClient httpClient, IConfiguration configuration)
+        public FlickrPhotosService(HttpClient httpClient, 
+            IConfiguration configuration, 
+            ILogger<FlickrPhotosService> logger)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _apiKey = configuration["Flickr:ApiKey"] ?? throw new ArgumentNullException("Flickr:ApiKey is not configured.");
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -41,7 +46,7 @@ namespace Flickr.Api.Services
         /// <param name="perPage"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public async Task<dynamic?> SearchPhotosAsync(
+        public async Task<FlickrPhotoResponse?> SearchPhotosAsync(
             string? userId = null,
             string? tags = null,
             string? tagMode = null,
@@ -61,8 +66,11 @@ namespace Flickr.Api.Services
             int perPage = 100,
             int page = 1)
         {
-            var url = "https://www.flickr.com/services/rest/";
-            var parameters = new Dictionary<string, string>
+
+            try
+            {
+                var url = "https://www.flickr.com/services/rest/";
+                var parameters = new Dictionary<string, string>
             {
                 { "method", "flickr.photos.search" },
                 { "api_key", _apiKey },
@@ -72,27 +80,45 @@ namespace Flickr.Api.Services
                 { "page", page.ToString() }
             };
 
-            if (!string.IsNullOrEmpty(userId)) parameters.Add("user_id", userId);
-            if (!string.IsNullOrEmpty(tags)) parameters.Add("tags", tags);
-            if (!string.IsNullOrEmpty(tagMode)) parameters.Add("tag_mode", tagMode);
-            if (!string.IsNullOrEmpty(text)) parameters.Add("text", text);
-            if (!string.IsNullOrEmpty(minUploadDate)) parameters.Add("min_upload_date", minUploadDate);
-            if (!string.IsNullOrEmpty(maxUploadDate)) parameters.Add("max_upload_date", maxUploadDate);
-            if (!string.IsNullOrEmpty(minTakenDate)) parameters.Add("min_taken_date", minTakenDate);
-            if (!string.IsNullOrEmpty(maxTakenDate)) parameters.Add("max_taken_date", maxTakenDate);
-            if (!string.IsNullOrEmpty(license)) parameters.Add("license", license);
-            if (!string.IsNullOrEmpty(sort)) parameters.Add("sort", sort);
-            if (privacyFilter.HasValue) parameters.Add("privacy_filter", privacyFilter.Value.ToString());
-            if (!string.IsNullOrEmpty(bbox)) parameters.Add("bbox", bbox);
-            if (accuracy.HasValue) parameters.Add("accuracy", accuracy.Value.ToString());
-            if (safeSearch.HasValue) parameters.Add("safe_search", safeSearch.Value.ToString());
-            if (!string.IsNullOrEmpty(contentTypes)) parameters.Add("content_types", contentTypes);
-            if (!string.IsNullOrEmpty(extras)) parameters.Add("extras", extras);
+                if (!string.IsNullOrEmpty(userId)) parameters.Add("user_id", userId);
+                if (!string.IsNullOrEmpty(tags)) parameters.Add("tags", tags);
+                if (!string.IsNullOrEmpty(tagMode)) parameters.Add("tag_mode", tagMode);
+                if (!string.IsNullOrEmpty(text)) parameters.Add("text", text);
+                if (!string.IsNullOrEmpty(minUploadDate)) parameters.Add("min_upload_date", minUploadDate);
+                if (!string.IsNullOrEmpty(maxUploadDate)) parameters.Add("max_upload_date", maxUploadDate);
+                if (!string.IsNullOrEmpty(minTakenDate)) parameters.Add("min_taken_date", minTakenDate);
+                if (!string.IsNullOrEmpty(maxTakenDate)) parameters.Add("max_taken_date", maxTakenDate);
+                if (!string.IsNullOrEmpty(license)) parameters.Add("license", license);
+                if (!string.IsNullOrEmpty(sort)) parameters.Add("sort", sort);
+                if (privacyFilter.HasValue) parameters.Add("privacy_filter", privacyFilter.Value.ToString());
+                if (!string.IsNullOrEmpty(bbox)) parameters.Add("bbox", bbox);
+                if (accuracy.HasValue) parameters.Add("accuracy", accuracy.Value.ToString());
+                if (safeSearch.HasValue) parameters.Add("safe_search", safeSearch.Value.ToString());
+                if (!string.IsNullOrEmpty(contentTypes)) parameters.Add("content_types", contentTypes);
+                if (!string.IsNullOrEmpty(extras)) parameters.Add("extras", extras);
 
-            var requestUrl = $"{url}?{string.Join("&", parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"))}";
-            var response = await _httpClient.GetStringAsync(requestUrl);
+                var requestUrl = $"{url}?{string.Join("&", parameters.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"))}";
 
-            return JsonSerializer.Deserialize<dynamic?>(response);
+                _logger.LogInformation("Fetching photos from Flickr API. URL: {Url}", requestUrl);
+
+                var response = await _httpClient.GetStringAsync(requestUrl);
+
+                // Configure JsonSerializerOptions to make property name matching case-insensitive
+                var result = JsonSerializer.Deserialize<FlickrPhotoResponse>(
+                    response,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true // Make property name matching case-insensitive
+                    });
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "An error occurred while fetching photos.");
+                throw; // Re-throw exception after logging
+            }
         }
     }
 }

@@ -27,7 +27,7 @@
 
                     <!-- Navbar Toggler -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#flickrNav" aria-controls="flickrNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-grid"></i>
+                        <i class="icon icon-grid"></i>
                     </button>
 
                     <!-- Navbar -->
@@ -37,7 +37,7 @@
                             <!-- Search Form -->
                             <div class="search-form position-relative d-flex align-items-center">
                                 <input id="photoSearch" class="form-control" type="text" placeholder="Search Photos">
-                                <button id="searchButton" class="position-absolute" type="submit"><i class="bi bi-search"></i></button>
+                                <button id="searchButton" class="position-absolute" type="submit"><i class="icon icon-search"></i></button>
                             </div>
                         </div>
                     </div>    
@@ -66,6 +66,14 @@
     
                 <!-- Photo Results -->
                 <div class="row" id="photoResults" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Loading Modal -->
+        <div class="loading-modal" id="loadingModal">
+            <div class="text-center">
+                <div class="spinner"></div>
+                <div class="loading-text">Loading, please wait...</div>
             </div>
         </div>
 
@@ -100,6 +108,6 @@
         </footer>
 
         <!-- Scroll To Top -->
-        <div id="scrollTopButton"><i class="bi bi-arrow-up-short"></i></div>
+        <div id="scrollTopButton"><i class="icon icon-arrow-up-short"></i></div>
     </body>
 </html>

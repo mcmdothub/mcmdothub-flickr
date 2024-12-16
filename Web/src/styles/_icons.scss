@@ -1,6 +1,6 @@
-.bi::before,
-[class^="bi-"]::before,
-[class*=" bi-"]::before {
+.icon::before,
+[class^="icon-"]::before,
+[class*=" icon-"]::before {
   display: inline-block;
   font-family: bootstrap-icons !important;
   font-style: normal;
@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.bi-grid::before {
+.icon-grid::before {
   content: "";
   display: inline-block;
   background-image: url('assets/img/icons/grid-white-50.png');
@@ -24,7 +24,7 @@
   vertical-align: middle;
 }
 
-.bi-search::before {
+.icon-search::before {
   content: "";
   display: inline-block;
   background-image: url('assets/img/icons/search-white-50.png');
@@ -35,7 +35,7 @@
   vertical-align: middle;
 }
 
-.bi-arrow-right::before {
+.icon-arrow-right::before {
   content: "";
   display: inline-block;
   background-image: url('assets/img/icons/arrow-right-white-50.png');
@@ -46,7 +46,7 @@
   vertical-align: middle;
 }
 
-.bi-arrow-up-short::before {
+.icon-arrow-up-short::before {
   content: "";
   display: inline-block;
   background-image: url('assets/img/icons/up-arrow-black-50.png');
@@ -57,7 +57,7 @@
   vertical-align: middle;
 }
 
-.bi-caret-down-fill::before {
+.icon-caret-down-fill::before {
   content: "";
   display: inline-block;
   background-image: url('assets/img/icons/caret-down-fill-white-50.png');
