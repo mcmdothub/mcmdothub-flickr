@@ -7,23 +7,19 @@
 # ├── Api/
 # │   ├── src/
 # │         ├── Flickr.Api/
+# │              ├── .env
 # │   ├── Dockerfile
 # │   ├── Flickr.Api.sln
 #
-# Use the official .NET Core runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+# Stage 1: Build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
-EXPOSE 5000
+COPY . ./
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
 
-# Use the .NET SDK image for build
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY . .
-RUN dotnet restore sample.api.sln
-RUN dotnet publish -c Release -o /app/publish
-
-# Build runtime image
-FROM base AS final
+# Stage 2: Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "Flickr.Api.dll"]

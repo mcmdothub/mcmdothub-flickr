@@ -45,6 +45,32 @@ To run the project, ensure the following dependencies are installed:
 
 ---
 
+## Environment Variables
+
+Create a `.env` file in the root directory with the following keys:
+```
+# Folder Structure:
+# project-root/
+# │
+# ├── docker-compose.yml
+# ├── Api/
+# │   ├── src/
+# │         ├── Flickr.Api/
+# │                ├── .env
+# │   ├── Dockerfile
+# │   ├── Flickr.Api.sln
+# │
+# ├── Web/
+# │   ├── src/
+# │   		├── [Other HTML project files]
+# │   ├── Dockerfile
+# │   ├── package.json
+```
+```env
+FLICKR_API_KEY=place_your_key_here
+ALLOWED_ORIGINS=http://127.0.0.1:5500,http://localhost:5000,http://172.17.16.1:5000,https://your-production-url.com
+```
+
 ## **Configuration**
 
 ### 1. **API Key Setup**
@@ -103,25 +129,53 @@ Set up your **Flickr API key** in `appsettings.json`:
 
 ---
 
-## **Deployment Options**
+## Running the Application with Docker
 
-### Docker Deployment
+### Steps to Run:
 
-You can run this API in a Docker container:
+1. **Ensure Docker Is Installed**:
+   - Download and install Docker from [here](https://www.docker.com/products/docker-desktop).
+   - Verify the installation by running the following command:
+     ```bash
+     docker --version
+     ```
 
-1. Build the Docker image:
+2. **Navigate to the Root Directory**:
+   Make sure you're in the root directory where the `docker-compose.yml` file is located.
 
    ```bash
-   docker build -t flickr-api:latest .
+   cd project-root
    ```
 
-2. Run the container:
-
+3. **Build and Start the Containers**:
+   Run the following command to build and start the containers:
    ```bash
-   docker run -d -p 7106:80 --name flickr-api flickr-api:latest
+   docker-compose up --build
    ```
 
-3. Access the API at `http://localhost:7106/swagger`.
+4. **Access the Services**:
+   - **API**: Open [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html) to explore the API using Swagger.
+   - **Frontend**: Open [http://localhost:8001](http://localhost:8001) to view the web application.
+
+5. **Shut Down the Containers**:
+   When you're done, shut down the containers using:
+   ```bash
+   docker-compose down
+   ```
+
+### Common Issues:
+
+- **Port Already in Use**:
+  If you encounter a port conflict, ensure no other application is using the ports defined in `docker-compose.yml`.
+
+- **API Key Not Set**:
+  If you get an error that the `FLICKR_API_KEY` is null, ensure your `.env` file is in the root directory and contains the correct key.
+
+- **Debugging Logs**:
+  View logs for containers using:
+  ```bash
+  docker logs <container_name>
+  ```
 
 ---
 

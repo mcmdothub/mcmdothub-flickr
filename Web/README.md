@@ -34,6 +34,22 @@ Current Version 0.0.1
 * [webpack-cli](https://github.com/webpack/webpack-cli) - Provides the interface of options webpack uses in its configuration file
 * [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) - Used to quickly develop an application
 
+## Environment Variables
+
+### Folder Structure
+```
+# Folder Structure:
+# project-root/
+# ├── Web/
+# │   ├── src/
+# │       ├── [HTML and JS project files]
+# │   ├── Dockerfile
+# │   ├── package.json
+```
+
+### Environment Variable Configuration
+
+Add necessary environment configurations for your frontend if needed.
 
 ## Deployment Options
 

@@ -7,12 +7,13 @@
 # ├── Api/
 # │   ├── src/
 # │         ├── Flickr.Api/
+# │              ├── .env
 # │   ├── Dockerfile
 # │   ├── Flickr.Api.sln
 # │
 # ├── Web/
 # │   ├── src/
-# │   		├── [Other HTML project files]
+# │       ├── [Other HTML project files]
 # │   ├── Dockerfile
 # │   ├── package.json
 #
@@ -22,27 +23,34 @@
 #       docker-compose up --build
 #
 # 3. Access the services
-# API: http://localhost:5000
-# Web: http://localhost:3000
+# API: http://localhost:8080
+# Web: http://localhost:8001
 
-version: "0.1"
 services:
   flickr-api:
     build:
-      context: ./Api/src
-      dockerfile: Dockerfile
+      context: ./Api  # Point to the folder containing the Dockerfile
+      dockerfile: Dockerfile  # The Dockerfile is located directly in the Api folder
     ports:
-      - "5000:5000"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - "8080:8080"
+    env_file:
+      - ./Api/src/Flickr.Api/.env  # Explicitly load the .env file from the Api folder
+    networks:
+      - flickr-network
 
   flickr-web:
     build:
-      context: ./Web
+      context: ./Web  # Point to the Web folder
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8001:80"
     environment:
       - NODE_ENV=production
     depends_on:
       - flickr-api
+    networks:
+      - flickr-network
+
+networks:
+  flickr-network:
+    driver: bridge
