@@ -75,7 +75,7 @@ npm run build
 
 ### Core Team and Founders
 
-* [Cygni](https://cygni.se/) Designer
+* [mcmdothub](https://github.com/mcmdothub) Designer
 
 ## Contributing
 

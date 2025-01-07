@@ -9,7 +9,7 @@
     "clean-dist": "rimraf dist",
     "clean-node": "rimraf node_modules"
   },
-  "author": "Cygni",
+  "author": "mcmdothub",
   "license": "SEE LICENSE IN <license> FILE",
   "keywords": [],
   "dependencies": {

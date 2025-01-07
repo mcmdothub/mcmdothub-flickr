@@ -154,7 +154,7 @@ The following scenarios are covered:
 
 ### Core Team
 
-- [Cygni](https://cygni.se/) - **Design & Development**
+- [mcmdothub](https://github.com/mcmdothub) - **Design & Development**
 
 ---
 
@@ -188,4 +188,4 @@ This project is licensed under the **MIT License**.
 
 For any questions or feedback, feel free to contact us:
 - **Email**: TODO
-- **Website**: [Cygni](https://cygni.se/)
+- **Website**: [mcmdothub](https://github.com/mcmdothub)

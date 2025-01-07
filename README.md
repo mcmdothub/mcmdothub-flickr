@@ -159,7 +159,7 @@ Below are the core packages used in this project:
 ## **Contributors**
 
 ### **Core Team**
-- [Cygni](https://cygni.se/) - Designer and Developer
+- [mcmdothub](https://github.com/mcmdothub) - Designer and Developer
 
 ---
 

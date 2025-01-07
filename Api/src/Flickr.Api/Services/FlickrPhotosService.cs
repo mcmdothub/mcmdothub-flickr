@@ -17,7 +17,9 @@ namespace Flickr.Api.Services
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            _apiKey = configuration["Flickr:ApiKey"] ?? throw new ArgumentNullException("Flickr:ApiKey is not configured.");
+            //_apiKey = configuration["Flickr:ApiKey"] ?? throw new ArgumentNullException("Flickr:ApiKey is not configured.");
+            _apiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY")
+          ?? throw new ArgumentNullException("Flickr API Key is not configured.");
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
